@@ -18,10 +18,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topTextField: UITextField!
+    var textFields: [UITextField]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textFields = [self.bottomTextField, self.topTextField]
         self.setTextField()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,14 +43,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func setTextField(){
         let memeTextAttributes = [
             NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
+            NSAttributedStringKey.strokeWidth.rawValue: -4,
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-            NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedStringKey.strokeWidth.rawValue: 10.0
+            NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40) as Any
             ] as [String : Any]
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        self.topTextField.textAlignment = .center
-        self.bottomTextField.textAlignment = .center
+        
+        for textField in self.textFields{
+            textField.defaultTextAttributes = memeTextAttributes
+            textField.textAlignment = .center
+        }
     }
     
     func subscribeForKeyboardNotifications(){
