@@ -25,22 +25,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         self.cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        self.subscribeForKeyboardNotifications()
     }
     
-    //MARK: - Setup Layout
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeForKeyboardNotifications()
+    }
+    
+    //MARK: - Setup
     
     func setTextField(){
-        let memeTextAttributes:[String:Any] = [
+        let memeTextAttributes = [
             NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
             NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedStringKey.strokeWidth.rawValue: 2.0]
+            NSAttributedStringKey.strokeWidth.rawValue: 10.0
+            ] as [String : Any]
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.textAlignment = .center
         self.bottomTextField.textAlignment = .center
+    }
+    
+    func subscribeForKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+    }
+    func unsubscribeForKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
     }
     
     //MARK: - IBActions
@@ -77,7 +91,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
+        self.keyboardWillHide()
         return true
+    }
+    
+    //MARK: - Keyboard
+    
+    @objc func keyboardWillShow(_ notification: Notification){
+        if self.bottomTextField.isFirstResponder{
+           view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(){
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat{
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
     }
 
 }
