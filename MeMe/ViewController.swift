@@ -9,20 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    struct Meme {
+        var topString: String
+        var bottomString: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+    }
     
+    //MARK: - Constants
     let topText = "TOP"
     let bottomText = "BOTTOM"
 
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topTextField: UITextField!
+    
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    
+    //MARK: - Variables
     var textFields: [UITextField]!
     
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textFields = [self.bottomTextField, self.topTextField]
+        self.shareButton.isEnabled = false
         self.setTextField()
         
     }
@@ -61,9 +77,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
     }
     
+    //MARK: - Layout
+    
+    func hideBars(){
+        self.toolBar.isHidden = true
+        self.navBar.isHidden = true
+    }
+    
+    func showBars(){
+        self.toolBar.isHidden = false
+        self.navBar.isHidden = false
+    }
+    
     //MARK: - IBActions
     
     @IBAction func presentAction(_ sender: UIButton) {
+        self.shareButton.isEnabled = true
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = sender.tag == 0 ? .camera : .photoLibrary
@@ -115,6 +144,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
+    }
+    
+    //MARK: - Methods
+    
+    func generatedMemedImage() -> UIImage{
+        
+        self.hideBars()
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        self.showBars()
+        
+        return memedImage
+    }
+    
+    @IBAction func save(){
+        let memedImage = [generatedMemedImage()]
+//        let meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage)
+        let activityViewController = UIActivityViewController(activityItems: memedImage, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+        
     }
 
 }

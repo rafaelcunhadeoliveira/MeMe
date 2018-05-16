@@ -18,7 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iI-d0-aL9">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZD-NL-yvg">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="MeMe Creator" id="SbL-Zq-26u">
+                                        <barButtonItem key="leftBarButtonItem" title="Share" id="eqD-dr-UeF">
+                                            <connections>
+                                                <action selector="save" destination="BYZ-38-t0r" id="Hvm-qa-qn0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FzD-Iu-HsZ">
+                                <rect key="frame" x="0.0" y="88" width="375" height="645"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8NM-cl-cnf">
+                                <rect key="frame" x="0.0" y="665" width="375" height="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8EV-qd-ak1"/>
+                                </connections>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="1iI-d0-aL9">
                                 <rect key="frame" x="0.0" y="733" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="itC-UX-HzX"/>
@@ -36,11 +60,8 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FzD-Iu-HsZ">
-                                <rect key="frame" x="0.0" y="44" width="375" height="689"/>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hgK-mb-quM">
-                                <rect key="frame" x="0.0" y="74" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -48,31 +69,25 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="aXc-ZW-mRX"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8NM-cl-cnf">
-                                <rect key="frame" x="0.0" y="665" width="375" height="48"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8EV-qd-ak1"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="hgK-mb-quM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="42t-bA-aDb"/>
+                            <constraint firstItem="XZD-NL-yvg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="E9x-hE-Bl4"/>
                             <constraint firstItem="1iI-d0-aL9" firstAttribute="top" secondItem="FzD-Iu-HsZ" secondAttribute="bottom" id="I5q-2F-PrX"/>
                             <constraint firstItem="FzD-Iu-HsZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MQH-7l-89P"/>
+                            <constraint firstItem="FzD-Iu-HsZ" firstAttribute="top" secondItem="XZD-NL-yvg" secondAttribute="bottom" id="Na7-Cq-kpI"/>
                             <constraint firstItem="FzD-Iu-HsZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VNl-VK-Poj"/>
-                            <constraint firstItem="FzD-Iu-HsZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="X5h-Ap-EB8"/>
                             <constraint firstItem="1iI-d0-aL9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bGh-YW-vuJ"/>
                             <constraint firstItem="1iI-d0-aL9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bhE-se-W6P"/>
                             <constraint firstItem="8NM-cl-cnf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cm8-nd-295"/>
                             <constraint firstItem="hgK-mb-quM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="i4O-Qr-gBb"/>
+                            <constraint firstItem="XZD-NL-yvg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jZn-xU-8eP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hgK-mb-quM" secondAttribute="trailing" id="kTd-HZ-Ugh"/>
                             <constraint firstItem="1iI-d0-aL9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="m3Y-g9-A0g"/>
+                            <constraint firstItem="hgK-mb-quM" firstAttribute="top" secondItem="XZD-NL-yvg" secondAttribute="bottom" constant="30" id="m9b-va-Zue"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FzD-Iu-HsZ" secondAttribute="trailing" id="qLh-cF-9mX"/>
                             <constraint firstItem="1iI-d0-aL9" firstAttribute="top" secondItem="8NM-cl-cnf" secondAttribute="bottom" constant="20" id="r5X-qS-J0s"/>
+                            <constraint firstItem="XZD-NL-yvg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s5o-wW-Mqy"/>
                             <constraint firstItem="8NM-cl-cnf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vLj-ux-PJR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -81,6 +96,9 @@
                         <outlet property="bottomTextField" destination="8NM-cl-cnf" id="IAi-bn-xkQ"/>
                         <outlet property="cameraButton" destination="lb8-ud-xKE" id="uv9-mo-guo"/>
                         <outlet property="memeImage" destination="FzD-Iu-HsZ" id="bBv-ew-x0b"/>
+                        <outlet property="navBar" destination="XZD-NL-yvg" id="mXT-e8-ySf"/>
+                        <outlet property="shareButton" destination="eqD-dr-UeF" id="Y0L-f2-zOC"/>
+                        <outlet property="toolBar" destination="1iI-d0-aL9" id="ncn-mB-Yn3"/>
                         <outlet property="topTextField" destination="hgK-mb-quM" id="1Ta-2a-u69"/>
                     </connections>
                 </viewController>
