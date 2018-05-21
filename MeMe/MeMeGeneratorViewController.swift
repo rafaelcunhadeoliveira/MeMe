@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     struct Meme {
         var topString: String
         var bottomString: String
         var originalImage: UIImage
-        var memedImage: UIImage
+        var memedImage: [UIImage]
     }
     
     //MARK: - Constants
@@ -33,6 +33,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: - Variables
     var textFields: [UITextField]!
+    var memedImage: [UIImage]?
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -99,6 +100,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func share(){
+        memedImage = [generatedMemedImage()]
+        let activityViewController = UIActivityViewController(activityItems: memedImage!, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        save()
+        self.present(activityViewController, animated: true, completion: nil)
+        
+    }
+    
     //MARK: - ImagePickerDelegate
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -163,14 +173,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
-    @IBAction func save(){
-        let memedImage = [generatedMemedImage()]
-//        let meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage)
-        let activityViewController = UIActivityViewController(activityItems: memedImage, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
-        
+    func save(){
+        let meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage!)
     }
+    
+
 
 }
 

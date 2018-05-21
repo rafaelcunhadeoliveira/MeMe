@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FC778918208A660D005B6AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC778917208A660D005B6AE6 /* AppDelegate.swift */; };
-		FC77891A208A660D005B6AE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC778919208A660D005B6AE6 /* ViewController.swift */; };
-		FC77891D208A660D005B6AE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC77891B208A660D005B6AE6 /* Main.storyboard */; };
+		FC77891A208A660D005B6AE6 /* MeMeGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC778919208A660D005B6AE6 /* MeMeGeneratorViewController.swift */; };
+		FC77891D208A660D005B6AE6 /* MeMeGenerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC77891B208A660D005B6AE6 /* MeMeGenerator.storyboard */; };
 		FC77891F208A660D005B6AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC77891E208A660D005B6AE6 /* Assets.xcassets */; };
 		FC778922208A660D005B6AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC778920208A660D005B6AE6 /* LaunchScreen.storyboard */; };
 		FC77892D208A660E005B6AE6 /* MeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC77892C208A660E005B6AE6 /* MeMeTests.swift */; };
@@ -36,8 +36,8 @@
 /* Begin PBXFileReference section */
 		FC778914208A660D005B6AE6 /* MeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC778917208A660D005B6AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC778919208A660D005B6AE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FC77891C208A660D005B6AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC778919208A660D005B6AE6 /* MeMeGeneratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeMeGeneratorViewController.swift; sourceTree = "<group>"; };
+		FC77891C208A660D005B6AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MeMeGenerator.storyboard; sourceTree = "<group>"; };
 		FC77891E208A660D005B6AE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC778921208A660D005B6AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC778923208A660D005B6AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				FC778917208A660D005B6AE6 /* AppDelegate.swift */,
-				FC778919208A660D005B6AE6 /* ViewController.swift */,
-				FC77891B208A660D005B6AE6 /* Main.storyboard */,
+				FC778919208A660D005B6AE6 /* MeMeGeneratorViewController.swift */,
+				FC77891B208A660D005B6AE6 /* MeMeGenerator.storyboard */,
 				FC77891E208A660D005B6AE6 /* Assets.xcassets */,
 				FC778920208A660D005B6AE6 /* LaunchScreen.storyboard */,
 				FC778923208A660D005B6AE6 /* Info.plist */,
@@ -234,7 +234,7 @@
 			files = (
 				FC778922208A660D005B6AE6 /* LaunchScreen.storyboard in Resources */,
 				FC77891F208A660D005B6AE6 /* Assets.xcassets in Resources */,
-				FC77891D208A660D005B6AE6 /* Main.storyboard in Resources */,
+				FC77891D208A660D005B6AE6 /* MeMeGenerator.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC77891A208A660D005B6AE6 /* ViewController.swift in Sources */,
+				FC77891A208A660D005B6AE6 /* MeMeGeneratorViewController.swift in Sources */,
 				FC778918208A660D005B6AE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,12 +296,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC77891B208A660D005B6AE6 /* Main.storyboard */ = {
+		FC77891B208A660D005B6AE6 /* MeMeGenerator.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FC77891C208A660D005B6AE6 /* Base */,
 			);
-			name = Main.storyboard;
+			name = MeMeGenerator.storyboard;
 			sourceTree = "<group>";
 		};
 		FC778920208A660D005B6AE6 /* LaunchScreen.storyboard */ = {
