@@ -104,6 +104,12 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
         memedImage = [generatedMemedImage()]
         let activityViewController = UIActivityViewController(activityItems: memedImage!, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.completionWithItemsHandler = {activity, completed, items, error in
+            if completed {
+                self.save()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
         save()
         self.present(activityViewController, animated: true, completion: nil)
         
