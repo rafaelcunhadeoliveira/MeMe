@@ -110,7 +110,6 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        save()
         self.present(activityViewController, animated: true, completion: nil)
         
     }
