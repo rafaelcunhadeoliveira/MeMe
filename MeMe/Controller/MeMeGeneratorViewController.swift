@@ -8,13 +8,7 @@
 
 import UIKit
 
-class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    struct Meme {
-        var topString: String
-        var bottomString: String
-        var originalImage: UIImage
-        var memedImage: [UIImage]
-    }
+class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - Constants
     let topText = "TOP"
@@ -38,7 +32,6 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.textFields = [self.bottomTextField, self.topTextField]
         self.shareButton.isEnabled = false
         self.setTextField()
         
@@ -48,11 +41,13 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
         super.viewWillAppear(animated)
         self.cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         self.subscribeForKeyboardNotifications()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeForKeyboardNotifications()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     //MARK: - Setup
@@ -64,6 +59,8 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
             NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40) as Any
             ] as [String : Any]
+        
+        self.textFields = [self.bottomTextField, self.topTextField]
         
         for textField in self.textFields{
             textField.defaultTextAttributes = memeTextAttributes
@@ -80,14 +77,9 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
     
     //MARK: - Layout
     
-    func hideBars(){
-        self.toolBar.isHidden = true
-        self.navBar.isHidden = true
-    }
-    
-    func showBars(){
-        self.toolBar.isHidden = false
-        self.navBar.isHidden = false
+    func manageBars(isHidden: Bool){
+        self.toolBar.isHidden = isHidden
+        self.navigationController?.setNavigationBarHidden(isHidden, animated: false)
     }
     
     //MARK: - IBActions
@@ -128,21 +120,6 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: TextFieldDelegate
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField.text == self.topText || textField.text == self.bottomText{
-            textField.text = ""
-        }
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        self.keyboardWillHide()
-        return true
-    }
-    
     //MARK: - Keyboard
     
     @objc func keyboardWillShow(_ notification: Notification){
@@ -165,24 +142,37 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
     
     func generatedMemedImage() -> UIImage{
         
-        self.hideBars()
+        self.manageBars(isHidden: true)
         
-        UIGraphicsBeginImageContext(self.view.frame.size)
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        self.showBars()
+        self.manageBars(isHidden: false)
         
         return memedImage
     }
     
     func save(){
         let meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage!)
+        
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+    }
+}
+
+extension MeMeGeneratorViewController: UITextFieldDelegate{
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField.text == self.topText || textField.text == self.bottomText{
+            textField.text = ""
+        }
+        return true
     }
     
-
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        self.keyboardWillHide()
+        return true
+    }
 }
 
