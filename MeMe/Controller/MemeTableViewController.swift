@@ -11,10 +11,16 @@ import UIKit
 class MemeTableViewController: UIViewController {
     
     var memes: [Meme] = []
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         setVariables()
+        tableView.reloadData()
     }
     
     func setVariables(){
@@ -38,6 +44,13 @@ extension MemeTableViewController: UITableViewDataSource{
         cell.imageTableViewCell.image = meme.memedImage[0]
         cell.labelTableViewCell.text = formatCellLabel(topString: meme.topString, bottomString: meme.bottomString)
         return cell
+    }
+    
+}
+
+extension MemeTableViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 104.0
     }
 }
 

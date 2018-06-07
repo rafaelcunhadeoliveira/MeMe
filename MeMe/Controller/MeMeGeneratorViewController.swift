@@ -16,7 +16,6 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
 
     
     //MARK: - IBOutlets
-    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -100,6 +99,7 @@ class MeMeGeneratorViewController: UIViewController, UIImagePickerControllerDele
             if completed {
                 self.save()
                 self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
         self.present(activityViewController, animated: true, completion: nil)
