@@ -31,6 +31,15 @@ class MemeTableViewController: UIViewController {
     func formatCellLabel(topString: String, bottomString: String) -> String{
         return topString + " ... " + bottomString
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tableViewSegue"{
+            if let vc = segue.destination as? DetailViewController{
+                let indexPath = tableView.indexPathForSelectedRow!
+                vc.image = memes[(indexPath.row)]
+            }
+        }
+    }
 
 }
 extension MemeTableViewController: UITableViewDataSource{
@@ -51,6 +60,10 @@ extension MemeTableViewController: UITableViewDataSource{
 extension MemeTableViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 104.0
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self
+        performSegue(withIdentifier: "tableViewSegue", sender: nil)
     }
 }
 

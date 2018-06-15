@@ -39,6 +39,15 @@ class MemeCollectionViewController: UIViewController {
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: heightDimension)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "collectionViewSegue"{
+            if let vc = segue.destination as? DetailViewController{
+                let indexPath = sender as! IndexPath
+                vc.image = memes[indexPath.row]
+            }
+        }
+    }
 
 
 }
@@ -52,6 +61,10 @@ extension MemeCollectionViewController: UICollectionViewDataSource{
         cell.imageCollectionCell.image = self.memes[indexPath.row].memedImage[0]
         return cell
     }
-    
-    
+}
+
+extension MemeCollectionViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "collectionViewSegue", sender: indexPath)
+    }
 }
